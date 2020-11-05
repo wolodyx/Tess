@@ -12,7 +12,7 @@ public:
 	virtual ~C12() {}
 	virtual void domain(D2&) const = 0;
 	virtual void point(double t, D2& point) const = 0;
-	virtual void der(double t, D2&) const = 0;
+	virtual void der(double t, D2&) const;
 };
 
 

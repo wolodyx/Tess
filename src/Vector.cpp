@@ -3,7 +3,11 @@
 #include <cfloat>
 
 
-D2::D2() {}
+D2::D2()
+: x(HUGE_VAL), y(HUGE_VAL)
+{
+}
+
 
 D2::D2(double xx, double yy)
 	: x(xx), y(yy) {}
@@ -16,6 +20,12 @@ D2::D2(const double* xy)
 D2 D2::operator+(const D2& other) const
 {
 	return D2(x + other.x, y + other.y);
+}
+
+
+D2 D2::operator-(const D2& other) const
+{
+	return D2(x - other.x, y - other.y);
 }
 
 
@@ -58,6 +68,7 @@ bool D3::operator!=(const D3& other) const
 
 
 D3::D3()
+	: x(HUGE_VAL), y(HUGE_VAL), z(HUGE_VAL)
 {
 }
 
@@ -104,4 +115,18 @@ bool Normalize(D3& v)
 	v.y *= r;
 	v.z *= r;
 	return true;
+}
+
+
+D2 D2::operator/(double k) const
+{
+	k = 1.0 / k;
+	return D2(x*k, y*k);
+}
+
+
+D3 D3::operator/(double k) const
+{
+	k = 1.0 / k;
+	return D3(x*k, y*k, z*k);
 }

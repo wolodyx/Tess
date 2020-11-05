@@ -1,5 +1,7 @@
 #include "ParametricGeometry.h"
 
+#include <cfloat>
+
 
 void C23::normal(const D2& uv, D3& n) const
 {
@@ -79,4 +81,22 @@ void C23_Plane::ders(const D2& uv, D3* du, D3* dv) const
 void C23_Plane::normal(const D2& uv, D3& n) const
 {
 	n = m_normal;
+}
+
+
+void C12::der(double t, D2& d) const
+{
+	D2 dom;
+	this->domain(dom);
+	const double w = dom.y - dom.x;
+	double dt = w / 20.0;
+	D2 f0, f1, df;
+	for(;;)
+	{
+		this->point(t-dt,f0);
+		this->point(t+dt,f1);
+		df = f1 - f0;
+		d = df / (2*dt);
+		break;
+	}
 }
